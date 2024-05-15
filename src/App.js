@@ -1,10 +1,12 @@
 import logo from './logo.svg';
 import './App.css';
+import MinhasRotas from './minhaRotas';
 
 function App() {
   return (
     <>
       <h1>Fatec</h1>
+      <MinhasRotas />
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
