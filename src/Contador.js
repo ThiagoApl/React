@@ -1,20 +1,31 @@
 import React, { useState } from 'react';
+import './App.css';
 
 function App() {
-  const [countHomens, setCountHomens] = useState(0);
-  const [countMulheres, setCountMulheres] = useState(0);
+  const [homens, setHomens] = useState(0);
+  const [mulheres, setMulheres] = useState(0);
+
+  const incrementarHomens = () => {
+    setHomens(homens + 1);
+  };
+
+  const incrementarMulheres = () => {
+    setMulheres(mulheres + 1);
+  };
 
   return (
-    <div className="App">
-      <div>
-        <h2>Contador de Homens: {countHomens}</h2>
-        <button onClick={() => setCountHomens(countHomens + 1)}>Incrementar Homens</button>
-        <button onClick={() => setCountHomens(countHomens - 1)}>Decrementar Homens</button>
+    <div className="container">
+      <h1>Contador de Homens e Mulheres</h1>
+      <div className="count">
+        Homens: {homens} | Mulheres: {mulheres}
       </div>
-      <div>
-        <h2>Contador de Mulheres: {countMulheres}</h2>
-        <button onClick={() => setCountMulheres(countMulheres + 1)}>Incrementar Mulheres</button>
-        <button onClick={() => setCountMulheres(countMulheres - 1)}>Decrementar Mulheres</button>
+      <div className="btn">
+        <button className="btn1" onClick={incrementarHomens}>
+          + Homem
+        </button>
+        <button className="btn2" onClick={incrementarMulheres}>
+          + Mulher
+        </button>
       </div>
     </div>
   );
