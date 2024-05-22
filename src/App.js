@@ -1,7 +1,28 @@
 import logo from './logo.svg';
 import './App.css';
 import MinhasRotas from './minhaRotas';
+import Gallery from './GaLLery.js';
+import { Profile } from './GaLLery.js'
+import { func } from 'prop-types';
 
+export default function App () {
+  return (
+    <Gallery />
+  );
+}
+
+export default function App() {
+  return <Profile />;
+}
+
+import GaLLery from './GaLLery.js';
+import { Profile } from './GaLLery.js'
+
+export default function App () {
+  return (
+    <Profile />
+  );
+}
 function App() {
   return (
     <>
@@ -27,4 +48,3 @@ function App() {
   );
 }
 
-export default App;
