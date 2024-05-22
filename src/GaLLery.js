@@ -16,6 +16,3 @@ export default function GaLLery() {
         </section>
     );
 }
-export function Profile () {
-    //...
-}

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import './App.js';
 
-function App() {
+
+function Contador() {
   const [homens, setHomens] = useState(0);
   const [mulheres, setMulheres] = useState(0);
 
@@ -31,4 +31,4 @@ function App() {
   );
 }
 
-export default App;
+export default Contador;

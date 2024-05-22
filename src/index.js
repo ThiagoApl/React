@@ -6,17 +6,14 @@ import Relogio from './Relogio.js';
 import Letreiro from './Letreiro.js';
 import Contador from './Contador.js'
 import { Container,Nav,NavDropdown, Navbar } from 'react-bootstrap';
+import MinhasRotas from './minhaRotas';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
- 
+
  <>
-    <Relogio />
-    <Letreiro />
-    <Contador />
+    <MinhasRotas />
  </> 
 );
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+
 
