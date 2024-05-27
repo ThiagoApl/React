@@ -1,50 +1,74 @@
-import logo from './logo.svg';
-import './App.css';
-import MinhasRotas from './minhaRotas';
-import Gallery from './GaLLery.js';
-import { Profile } from './GaLLery.js'
-import { func } from 'prop-types';
-
-export default function App () {
-  return (
-    <Gallery />
+import { useState } from 'react';
+import { SculptureList } from './Data.js';
+import Button from './Exemplo1.js';
+export default function Gallery() {
+    const [index, setIndex]= useState(0);
+    function handleClick() {
+        setIndex(index + 1);
+    }
+    let sculpture = SculptureList[index];
+    return (
+        <>
+        <Button onClick={handleClick}>
+            Next
+        </Button>
+        <h2>
+            <i>
+                {sculpture.name}</i>
+            by  {sculpture.artist}
+        </h2>
+        ({index + 1}of {SculptureList.length})
+        <h3>
+            <img
+            src={sculpture.url}
+            alt={sculpture.alt}
+        />
+        </h3>
+        <p>
+            {sculpture.description}
+        </p>
+    </>
   );
 }
+import { useState } from 'react';
+import {SculptureList} from './Data.js';
 
-export default function App() {
-  return <Profile />;
-}
-
-import GaLLery from './GaLLery.js';
-import { Profile } from './GaLLery.js'
-
-export default function App () {
-  return (
-    <Profile />
-  );
-}
-function App() {
-  return (
-    <>
-      <h1>Fatec</h1>
-      <MinhasRotas />
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+export default function Gallery() {
+    const [index, setIndex] = useState(0);
+    const [showMore, setShowMore] = useState(false);
+    function handlePlayClick() {
+        setIndex(index + 1);
+    }
+    function handleMoreClick() {
+        setShowMore(!showMore);
+    }
+    let sculpture = SculptureList[index];
+    return (
+        <>
+        <Button onClick={handleNextClick}>
+            Next
+        </Button>
+    <h2>
+        <i>{sculpture.name}</i>
+        by {sculpture.artist}
+    </h2>
+    <h3>
+        ({index + 1} of {SculptureList.length})
+    </h3>
+    <Button onClick={handleMoreClick}>
+        {showMore ? 'Hide' : 'Show'} details
+    </Button>
+    showMore && <p>{sculpture.description}</p>
+    <img
+        src={sculpture.url}
+        alt={sculpture.alt}
+    />
     </>
   );
 }
 
+import  Image  from './Image.js';
+import { createRoot } from 'react-dom/client';
+
+const root = createRoot(document.getElementById('root'))
+root.render(<Image />);
