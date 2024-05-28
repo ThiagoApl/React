@@ -72,3 +72,28 @@ import { createRoot } from 'react-dom/client';
 
 const root = createRoot(document.getElementById('root'))
 root.render(<Image />);
+
+import { useState } from 'react';
+import Chat from './Chat.js';
+import ContactList from './ContactList.js';
+
+export default function messager() {
+    const [to, setTo] = useState(contacts[0]);
+    return (
+        <div>
+            <ContactList
+                contacts={contacts}
+                selectedContact={to}
+                onSelect={contact => setTo(contact)}
+            />
+        <Chat contact={to} />
+        </div>
+    )
+}
+
+    const contacts = [
+        {name: 'Taylor', email: 'taulor@mail.com'},
+        {name: 'Alice', email: 'alice@mail.com'},
+        {name: 'Bob', email: 'bob@mail.com'}
+    ];
+    
