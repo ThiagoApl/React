@@ -96,4 +96,139 @@ export default function messager() {
         {name: 'Alice', email: 'alice@mail.com'},
         {name: 'Bob', email: 'bob@mail.com'}
     ];
-    
+
+import { useEffect, useState } from 'react';
+import Product from './Componentes/Products.js';
+
+/**
+ * @param {string} url caminho da função
+ * @param {string} method métod da função
+ * @returns objetos de resposta
+ */
+async function api(url, method, body = undefined) {
+    return await fetch(`http://localhost4000${url}`,{
+        body: body !== undefined ? JSON.stringify(body) : body,
+        method: method,
+        headers: {
+            Accept: "aplication/json",
+            "Content-Type": "application/json",
+        },
+    }).then((res) => res.json());
+}
+
+/**
+ * @returns lista dos produtos
+ */
+async function apiGetProduct() {
+    const data = await api("/products", "GET");
+    return data.products;
+}
+/**
+ * Salva o carrinho de compra no API
+ * @param {Object[]} Products Lista os produtos
+ */
+async function apiSubmitCart(Products) {
+    await api("/purchases", "POST", {Products});
+}
+
+function App() {
+    const [productsLoading, setProductsLoading] = useState(false); //Status do Loading do Produtos
+    const [products, setProducts] = useState([]); //Lista de Produtos
+    const [cart, setCar] = useState([]); // lista dse produtos no carrinho
+    const [cartLoading, setCartLoading] = useState(false); //Status do Loading do carrinho
+}
+
+/**
+ * Busca dos Produtos
+ */
+async function getProducts() {
+    setProductsLoading(true); // Ativa loading dos produtos
+    setProducts(await apiGetProduct()); //Salva a lista de produtos na variavel global
+    setProductsLoading(false); // Desativa loading dos produtos
+}
+
+/**
+ * Salva os Produtos
+ */
+
+async function SubmitCart() {
+    setCartLoading(true); // Ativa loading do carrinho
+    await apiSubmitCart(cart); //Salva o carrinho
+    setCar([]); //Limpa o carrinho
+    setCartLoading(false); //Desaiva loadingo do carrinho
+
+    getProducts(); // busca os produtos novamente
+}
+
+/**
+ * Altera as Unidades do Carrinho
+ */
+
+function setProducts(product, Change) {
+    const products = cart.filter(({id}) => {
+        return id !== product.id;
+    });
+
+    product.units += Change;
+    if (product.units > 0) {
+        setCar(() => [... products, product]);
+    }else {
+        setCar(() => [...products]);
+        setProducts((Lastproducts) => [...Lastproducts, Product]);
+    }
+}
+
+/**
+ * Adicona Prodtos no carrinho
+ */
+
+function AddProduct (product) {
+    product.units = 1;
+    setCar(() => [...cart, product]);
+
+    setProducts(() =>
+        product.filter(({id}) => {
+            return id !== product.id;
+        })
+    );
+ } 
+
+ useEffect(() => {
+    getProducts(); // Busca os produtos ao carregar a pagina
+ },[]);
+
+ return;
+
+ import { useEffect, useState } from 'react';
+ import styled from "styled-components";
+ import Cart from './Componentes/Cart.js';
+ import Products from './Componentes/Products.js';
+
+ const Smain = styled.main`
+    width: 100%;
+    height: 100vh;
+    display: grid;
+    grid-template-columns; 300px 1fr;
+    grid-template-rows: 1fr;
+ `;
+
+ return (
+    <Smain>
+        <Cart
+            products={cart}
+            onChange={setProduct}
+            onClick={SubmitCart}
+            IsLoading={cartLoading}
+        />
+        <products
+            products={products}
+            onClick={AddProduct}
+            IsLoading={productsLoading}
+        />
+    </Smain>
+ );
+
+ 
+ 
+
+
